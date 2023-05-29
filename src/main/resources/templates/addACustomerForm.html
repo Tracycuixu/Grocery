@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"> >
+<head th:replace="common::common_head(title)">
+</head>
+<body class="sb-nav-fixed">
+<nav th:replace="common::common_nav"></nav>
+<div id="layoutSidenav">
+    <div th:replace="common::layoutSidenac">
+    </div>
+    <div id="layoutSidenav_content">
+        <div class="container">
+            <div class="row">
+                <h1 class="text-center mb-4">Add A New customer </h1>
+            </div>
+            <form th:action="@{/addsinglecustomer}" method="POST">
+                <div class="row">
+                <table>
+                    <tr>
+                    <td class="col-3"></td>
+                    <td class="col-2">
+                        <div class="input-group mb-6">
+                            <label>Customer Name: </label>
+                        </div>
+                    </td>
+                    <td class="col-4">
+                        <div class="input-group mb-6">
+                            <input type="text" name="name"  id="name" class="form-control" placeholder=""
+                                   aria-describedby="helpId">
+
+                        </div>
+                    </td>
+                    <td class="col-3"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-3"></td>
+                        <td class="col-2">
+                            <div class="input-group mb-6">
+                                <label>Customer Unit Price: </label>
+                            </div>
+                        </td>
+                        <td class="col-4">
+                            <div class="input-group mb-6">
+                                <input type="text" name="unitPrice"  id="unitPrice" class="form-control" placeholder=""
+                                       aria-describedby="helpId">
+                            </div>
+                        </td>
+                        <td class="col-3"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-3"></td>
+                        <td class="col-2">
+                            <div class="input-group mb-6">
+                                <label>Unit Format: </label>
+                            </div>
+                        </td>
+                        <td class="col-4">
+                            <div class="input-group mb-6">
+                                <input type="text" name="unitFormat"  id="unitForm" class="form-control" placeholder=""
+
+                                       aria-describedby="helpId">
+                            </div>
+                        </td>
+                        <td class="col-3"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-3"></td>
+                        <td class="col-2">
+                            <div class="input-group mb-6">
+                                <label>Quantity: </label>
+                            </div>
+                        </td>
+                        <td class="col-4">
+                            <div class="input-group mb-6">
+                                <input type="text" name="quantity" id="Quantity" class="form-control" placeholder=""
+                                       aria-describedby="helpId">
+                            </div>
+                        </td>
+                        
+                        <td class="col-3"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-3"></td>
+                        <td class="col-2">
+                            <div class="input-group mb-6">
+                                <label>Category: </label>
+                            </div>
+                        </td>
+                        <td class="col-4">
+
+                            <select id="selectedValue" name="selectedValue" >
+                                <option value="1">Fruit</option>
+                                <option value="2">Vegetable</option>
+                                <option value="3">Dairy</option>
+                                <option value="4">Eggs</option>
+                                <option value="5">Fish&Seafood</option>
+                                <option value="6">Meat&Poultry</option>
+
+
+                            </select>
+
+
+                        </td>
+
+                        <td class="col-3"></td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2"></td>
+                        <td colspan="2">
+                            <button type="submit" class="btn bg-warning"  value="Submit">Submit
+                            </button>
+
+                            <button type="button" class="btn bg-warning"  value="Cancel">Cancel
+                            </button>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+
+            </form>
+        </div>
+    </div>
+
+
+    <div>
+        <footer th:replace="common::common_footer"></footer>
+    </div>
+
+</div>
+    <script th:replace="common::bootstrap"></script>
+    <script th:replace="common::custom-scripts"></script>
+    <script th:replace="common::chartjs"></script>
+    <script th:replace="common::chartjs-demo"></script>
+    <script th:replace="common::chartjs-bar-demo"></script>
+    <script th:replace="common::simple-datatables"></script>
+    <script th:replace="common::datatables-demo"></script>
+</body>
+</html>

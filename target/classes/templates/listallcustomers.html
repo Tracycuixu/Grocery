@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"> >
+<head th:replace="common::common_head(title)">
+</head>
+<body class="sb-nav-fixed">
+<nav th:replace="common::common_nav"></nav>
+<div id="layoutSidenav">
+  <div th:replace="common::layoutSidenac">
+  </div>
+  <div id="layoutSidenav_content">
+    <div class="container">
+      <h1 class="text-center mb-4">Customer Management</h1>
+        <h3 th:text="${loggedInAdmin?.adminname + ' - You are logged in'}"></h3>
+      <a class="btn bg-danger" th:href="@{/user/showFormForAdd}">Add New Customer</a>
+      <br>
+      <form th:action="@{/delete}" method="post">
+        <table class="table table-striped" col-md-10>
+          <tbody>
+          <thead>
+<!--            <tr class="bg-light">-->
+<!--              <th>No.</th>-->
+<!--              <th>Customer ID</th>-->
+<!--              <th>Customer Name <span id="sort-icon" onclick="toggleSortDirection()">&#x25B2;</span></th>-->
+
+<!--              <th>Customer Age</th>-->
+<!--              <th>Customer Address</th>-->
+<!--              <th>Counts Of Orders</th>-->
+<!--              <th></th>-->
+<!--              <th><input type="submit" name="submit" value="Delete Selected" class="bg-success btn text-white"></th>-->
+<!--            </tr>-->
+            <tr>
+              <th>UserName</th>
+              <th>Password</th>
+              <th>Address</th>
+              <th>Email</th>
+              <th>Phone</th>
+                <th>Others</th>
+<!--              <th><input type="submit" name="submit" value="Delete Selected" class="bg-success btn text-white"></th>-->
+            </tr>
+          </thead>
+
+          </tr>
+          </tbody>
+          <tr class="bg-light">
+
+
+          </tr>
+          <tbody>
+          <tr th:each="tempUser : ${users}">
+            <td th:text="${tempUser.username}"></td>
+            <td th:text="${tempUser.password}"></td>
+            <td th:text="${tempUser.address}"></td>
+            <td th:text="${tempUser.email}"></td>
+            <td th:text="${tempUser.phone}"></td>
+
+            <td>
+              <!-- Add Update button/link -->
+              <!-- <a th:href="@{/user/showFormForUpdate(userId=${tempUser.id})}" class="btn btn-info btn-sm">Update</a>-->
+<!--              <a th:href="@{/user/showFormForUpdate(userId=${tempUser.id}, loggedInUsername=${loggedInUser.username})}" class="btn btn-info btn-sm">Update</a>-->
+                <a th:href="@{/user/showFormForUpdate(userId=${tempUser.id})}" class="btn btn-info btn-sm">Update</a>
+              <!-- Add Delete button/link -->
+              <a th:href="@{/user/delete(userId=${tempUser.id})}" class="btn btn-danger btn-sm"
+                 onclick="if (!(confirm('Are you sure you want to delete this user?'))) return false">
+                Delete</a>
+            </td>
+          </tr>
+          </tbody>
+<!--          <tr class="bg-light" th:each="customer,p:${customerslist}">-->
+<!--            <th th:text="${p.count}"></th>-->
+<!--            <th th:text="${customer.customerId}">ji</th>-->
+<!--            <th th:text="${customer.name}">MyName</th>-->
+<!--            <th th:text="${customer.age}">5.0</th>-->
+<!--            <th th:text="${customer.address}">7</th>-->
+<!--            <th th:text="${customer.countsoforders}">7</th>-->
+
+
+<!--            <td>-->
+
+<!--              <a th:href="@{/deletesinglecustomer(customerId=${customer.CustomerId})}" class="btn bg-info">delete</a>-->
+<!--              <a class="btn bg-danger">update</a>-->
+<!--              <a class="btn bg-warning">detail</a>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <input type="checkbox" class="form-check-input " name="checkbox_delete" id="" th:value="${customer.customerionId}">-->
+<!--            </td>-->
+<!--          </tr>-->
+        </table>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div>
+  <footer th:replace="common::common_footer"></footer>
+</div>
+
+<script>
+  function toggleSortDirection() {
+    var sortIcon = document.getElementById("sort-icon");
+    if (sortIcon.innerHTML == "&#x25B2;") {
+      sortIcon.innerHTML = "&#x25BC;";
+    } else {
+      sortIcon.innerHTML = "&#x25B2;";
+    }
+  }
+</script>
+<script th:replace="common::bootstrap"></script>
+<script th:replace="common::custom-scripts"></script>
+<script th:replace="common::chartjs"></script>
+<script th:replace="common::chartjs-demo"></script>
+<script th:replace="common::chartjs-bar-demo"></script>
+<script th:replace="common::simple-datatables"></script>
+<script th:replace="common::datatables-demo"></script>
+</body>
+</html>

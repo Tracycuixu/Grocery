@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common::common_head(title)">
+</head>
+<body class="sb-nav-fixed">
+<nav th:replace="common::common_nav"></nav>
+<div id="layoutSidenav">
+    <div th:replace="common::layoutSidenac">
+    </div>
+    <div id="layoutSidenav_content">
+        <form th:action="@{/addinventorylist}" method="POST">
+        <table class="table">
+            <thead>
+            <tr>
+                <td><a class=" btn btn-primary" onclick="copyinventoryline()" >add more items</a>
+                </td>
+            </tr>
+            <tr>
+                <th>Category Name</th>
+                <th>Product Name</th>
+                <th>Product UnitFormat</th>
+                <th>CostPrice</th>
+                <th>Quantiry</th>
+                <th>Operations</th>
+
+
+            </tr>
+            </thead>
+            <div id="inventorytablebody">
+
+            <tr id="inventoryline">
+                <td scope="row">
+                    <select id="categoryname" onchange="getSelectedValue()" name="categoryId">
+                    <option th:each="category,index :${categorynamelist}"
+                            th:value="${index.index}+1"
+                            th:text="${category.name}"></option>
+                </select>
+                </td>
+                <td>
+                    <select id="myDropdown" name="productId">
+                    <option th:each="product,index :${productList}"
+                            th:value="${index.index}+1"
+                            th:text="${product.name}">
+
+                    </option>
+                </select>
+                </td>
+                <td>
+                    <select id="myDropdownunitformat" name="unitformat">
+                    <option th:each="product,index :${productList}"
+                            th:value="${index.index}+1"
+                            th:text="${product.unitformat}">
+
+                    </option>
+                </select>
+                </td>
+                <td>
+                    <div class="input-group">
+                    <input type="text" class="form-control" name="costPrice" id="costprice"
+                           aria-describedby="helpId" placeholder="">
+                </div>
+                </td>
+                <td>
+                    <div class="input-group">
+                    <input type="text" class="form-control" name="costPrice" id="quantity"
+                           aria-describedby="helpId" placeholder="">
+                </div>
+                </td>
+
+
+            </tr>
+
+            </div>
+        </table>
+
+        </form>
+        <div>
+            <footer th:replace="common::common_footer"></footer>
+        </div>
+    </div>
+
+</div>
+<script th:replace="common::bootstrap"></script>
+<script th:replace="common::custom-scripts"></script>
+<script th:replace="common::chartjs"></script>
+<script th:replace="common::chartjs-demo"></script>
+<script th:replace="common::chartjs-bar-demo"></script>
+<script th:replace="common::simple-datatables"></script>
+<script th:replace="common::datatables-demo"></script>
+
+<script>
+    // 获取需要复制的元素
+    // 获取需要复制的元素
+    var element_name_i=1;
+    function  copyinventoryline() {
+        var table= document.getElementById("inventorytablebody");
+        var firstRow = document.getElementById("inventoryline");
+
+        // 复制该元素及其所有子元素
+        var newRow = firstRow.cloneNode(true);
+        newRow.id="newRow"+element_name_i;
+
+        // 修改副本的属性或文本内容
+        // clonedElement.id = "cloned";
+
+        firstRow.insertAdjacentElement("afterend",newRow);
+        console.log("ID="+newRow.id);
+
+        element_name_i++;
+    }
+    function getSelectedValue() {
+        var selectedValue = document.getElementById("categoryname").value;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var responseArray = JSON.parse(this.responseText);
+                // Clear existing options from the dropdown
+                var dropdown = document.getElementById("myDropdown");
+                dropdown.options.length = 0;
+                // Add options to the existing dropdown
+                for (var i = 0; i < responseArray.length; i++) {
+                    var option = document.createElement("option");
+                    option.value = responseArray[i].productId;
+                    option.text = responseArray[i].name;
+                    dropdown.add(option);
+                }
+
+
+                //
+                var dropdown = document.getElementById("myDropdownunitformat");
+                dropdown.options.length = 0;
+                // Add options to the existing dropdown
+                for (var i = 0; i < responseArray.length; i++) {
+                    var option = document.createElement("option");
+                    option.value = responseArray[i].id;
+                    option.text = responseArray[i].unitFormat;
+                    dropdown.add(option);
+                }
+            }
+        };
+        xhttp.open("POST", "/fillmyproductdropdownlist", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("selectedValue=" + selectedValue);
+    }
+
+
+
+
+</script>
+</body>
+</html>

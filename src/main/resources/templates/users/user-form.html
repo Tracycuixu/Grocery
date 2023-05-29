@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width , initial-scale = 1 , shrink-to-fit=no">
+
+    <!--        https://getbootstrap.com/-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/demo.css}" />
+    <title>User Save Form</title>
+</head>
+<body>
+<div class="container">
+<!--    <h3 th:text="${loggedInUser?.username + ' - You are logged in'}"></h3>-->
+    <h3 th:text="${loggedInAdmin?.adminname + ' - You are logged in'}"></h3>
+    <hr>
+    <p class="h4 mb-4">Save User</p>
+    <form th:action="@{/user/upsert}" th:object="${user}" method="POST">
+        <input type="text" th:field="*{id}" class="form-control mb-4 w-25" hidden placeholder="id">
+        <input type="text" th:field="*{username}" class="form-control mb-4 w-25" placeholder="UserName">
+        <p th:if="${#fields.hasErrors('username')}" th:errorclass="error" th:errors="*{username}" ></p>
+
+        <input type="text" th:field="*{password}" class="form-control mb-4 w-25" placeholder="Password">
+        <p th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}" ></p>
+
+        <input type="text" th:field="*{email}" class="form-control mb-4 w-25" placeholder="Email">
+        <p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}" ></p>
+
+        <input type="text" th:field="*{address}" class="form-control mb-4 w-25" placeholder="Address">
+        <p th:if="${#fields.hasErrors('address')}" th:errorclass="error" th:errors="*{address}" ></p>
+
+        <input type="text" th:field="*{phone}" class="form-control mb-4 w-25" placeholder="phone">
+        <p th:if="${#fields.hasErrors('phone')}" th:errorclass="error" th:errors="*{phone}" ></p>
+
+        <button type="submit" class="btn btn-info col-2">Save</button>
+    </form>
+
+    <hr>
+
+    <a th:href="@{/user/list}">Back to the user List</a>
+</div>
+</body>

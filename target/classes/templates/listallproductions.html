@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"> >
+<head th:replace="~{common::common_head(title)}">
+</head>
+<body class="sb-nav-fixed">
+<nav th:replace="~{common::common_nav}"></nav>
+<div id="layoutSidenav">
+    <div th:replace="~{common::layoutSidenac}">
+    </div>
+    <div id="layoutSidenav_content">
+        <div class="container">
+            <h1 class="text-center mb-4">Product Management</h1>
+            <h3 th:text="${loggedInAdmin?.adminname + ' - You are logged in'}"></h3>
+            <a class="btn bg-danger" th:href="@{/showaddAProductionForm}">Add New Product</a>
+            <br>
+            <form th:action="@{/deleteselectedproductions}" method="post">
+                <table class="table table-striped" col-md-10>
+                    <tbody>
+                    <thead>
+                        <tr class="bg-light">
+                            <th>No.</th>
+                            <th>ProductionID</th>
+                            <th>Name <span id="sort-icon" onclick="toggleSortDirection()">&#x25B2;</span></th>
+<!--                            <th>photo Path</th>-->
+                            <th>Unit_Format</th>
+                            <th>category</th>
+
+
+                            <th>Image</th>
+                            <th></th>
+                            <th><input type="submit" name="submit" value="Delete Selected"
+                                       class="bg-success btn text-white"></th>
+                        </tr>
+                    </thead>
+
+                    </tr>
+                    </tbody>
+                    <tr class="bg-light">
+
+
+                    </tr>
+                    <tr class="bg-light" th:each="product,p:${productionslist}">
+                        <th th:text="${p.count}"></th>
+                        <th th:text="${product.getProductId()}">ji</th>
+                        <th th:text="${product.getName()}">MyName</th>
+
+<!--                        <th th:text="${product.getImgPath()}"></th>-->
+                        <th th:text="${product.getUnitFormat()}">5.0</th>
+                        <th th:text="${product.category.getCategoryId()}">5.0</th>
+                        <th><img th:src="@{/img/product/{name}.jpg(name=${product.getName})}"  width="60px" height="60px" alt="Product Image"></th>
+                        <td>
+                            <a th:href="@{/deletesingleproduct(productId=${product.getProductId()})}"
+                               class="btn bg-info">delete</a>
+                            <a th:href="@{/updateAProductionForm(productionId=${product.getProductId()})}"
+                               class="btn bg-danger">update</a>
+
+                        </td>
+                        <td>
+                            <input type="checkbox" class="form-check-input " name="checkbox_delete" id=""
+                                   th:value="${product.getProductId()}">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <footer th:replace="~{common::common_footer}"></footer>
+</div>
+
+<script>
+    function toggleSortDirection() {
+        var sortIcon = document.getElementById("sort-icon");
+        if (sortIcon.innerHTML == "&#x25B2;") {
+            sortIcon.innerHTML = "&#x25BC;";
+        } else {
+            sortIcon.innerHTML = "&#x25B2;";
+        }
+    }
+</script>
+<script th:replace="~{common::bootstrap}"></script>
+<script th:replace="~{common::custom-scripts}"></script>
+<script th:replace="~{common::chartjs}"></script>
+<script th:replace="~{common::chartjs-demo}"></script>
+<script th:replace="~{common::chartjs-bar-demo}"></script>
+<script th:replace="~{common::simple-datatables}"></script>
+<script th:replace="~{common::datatables-demo}"></script>
+</body>
+</html>

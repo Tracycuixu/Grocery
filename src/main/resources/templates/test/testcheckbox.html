@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
+
+
+
+<body>
+This is your thymeleaf template！
+<form th:action="@{/passingcheckboxvalue}" method="POST" >
+    <label><input type="checkbox" name="hobby" value="reading">阅读</label><br>
+    <label><input type="checkbox" name="hobby" value="sports" checked>运动</label><br>
+    <label><input type="checkbox" name="hobby" value="music" checked>音乐</label><br>
+    <label><input type="checkbox" name="hobby" value="travel">旅行</label><br>
+    <label><input type="checkbox" name="hobby" value="art">艺术</label><br>
+<input type="submit" name="submit" value="submit" id="submit">
+</form>
+
+
+
+</body>
+
+
+</html>

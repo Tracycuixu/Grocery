@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common::common_head(title)">
+</head>
+<body class="sb-nav-fixed">
+<nav th:replace="common::common_nav"></nav>
+<div id="layoutSidenav">
+    <div th:replace="common::layoutSidenac">
+    </div>
+    <div id="layoutSidenav_content">
+        <div class="container">
+
+            <br>
+            <br>
+            <br>
+            <!--            <h3 th:text="${loggedInAdmin.adminname + ' - You are logged in'}"></h3>-->
+            <h3 th:text="${loggedInAdmin?.adminname}"></h3>
+            <div class="row">
+
+                <br>
+                <br>
+                <br>
+
+                <h1 class="text-center mb-4">Add A New Product </h1>
+                <br>
+                <br>
+                <br>
+
+            </div>
+            <form th:action="@{/addsingleproduct}" th:object="${production}" enctype="multipart/form-data"
+                  method="POST">
+                <div class="row">
+                    <table class="table-spacing">
+                        <tr>
+                            <br>
+                            <br>
+                            <br>
+
+                            <td class="col-3"></td>
+                            <td class="col-2">
+                                <div class="input-group mb-6">
+                                    <label class="text-lg-left">Production Name: </label>
+                                </div>
+                            </td>
+                            <td class="col-4">
+                                <div class="input-group mb-6">
+                                    <input type="text" name="name" id="name" class="form-control" placeholder=""
+                                           aria-describedby="helpId" th:field="*{name}">
+
+                                </div>
+                            </td>
+                            <td class="col-3"></td>
+                        </tr>
+                        <br>
+
+                        <br>
+                        <br>
+
+
+                        <tr>
+                            <td class="col-3"></td>
+                            <td class="col-2">
+                                <div class="input-group mb-6">
+                                    <label>Unit Format: </label>
+                                </div>
+                            </td>
+                            <td class="col-4">
+                                <div class="input-group mb-6">
+                                    <input type="text" name="unitFormat" id="unitForm" class="form-control"
+                                           placeholder=""
+
+                                           aria-describedby="helpId" th:field="*{unitFormat}">
+                                </div>
+                            </td>
+                            <td class="col-3"></td>
+                        </tr>
+                        <br>
+
+                        <br>
+                        <br>
+
+                        <tr>
+                            <td class="col-3"></td>
+                            <td class="col-2">
+                                <div class="input-group mb-6">
+                                    <label>Category: </label>
+                                </div>
+                            </td>
+                            <td class="col4">
+
+                                <select id="selectedValue" name="selectedValue">
+                                    <option value="0">unselected</option>
+                                    <option th:each="category,index :${categoryList}"
+                                            th:value="${index.index}+1"
+                                            th:text="${category.name}"></option>
+                                </select>
+                                <a class="btn btn-primary" id="myButton">add a new category</a>
+                            </td>
+                            <td class="col-3"></td>
+                        </tr>
+                        <br>
+                        <br>
+                        <br>
+
+                        <tr>
+                            <td class="col-3"></td>
+                            <td class="col-2">
+                                <div class="input-group mb-6">
+                                    <label class="">Add A new Category</label>
+                                </div>
+                            </td>
+                            <td class="col-4">
+                                <div class="input-group mb-6">
+                                    <input type="text" name="categoryname" id="myInput" class="form-control"
+                                           placeholder=""
+                                           aria-describedby="helpId" disabled>
+                                </div>
+                            </td>
+                            <td class="col-3"></td>
+                        </tr>
+                        <br>
+                        <br>
+                        <br>
+
+
+                        <tr>
+                            <td class="col-3"></td>
+                            <td class="col-2">
+                                <div class="input-group mb-6">
+                                    Product Photo
+                                </div>
+                            </td>
+                            <td class="col-4">
+                                <div class="input-group mb-6">
+                                    <input type="file" name="file">
+
+                                </div>
+                            </td>
+                            <td class="col-3"></td>
+                        </tr>
+                        <br>
+                        <br>
+                        <br>
+
+                        <tr>
+                            <td colspan="2"></td>
+                            <td colspan="2">
+                                <button type="submit" class="btn bg-warning btn-lg" value="Submit">Submit
+                                </button>
+
+                                <button type="button" class="btn bg-warning btn-lg" value="Cancel">Cancel
+                                </button>
+                            </td>
+                        </tr>
+                        <br>
+                    </table>
+                </div>
+            </form>
+        </div>
+        <div>
+            <footer th:replace="common::common_footer"></footer>
+        </div>
+    </div>
+
+</div>
+<script th:replace="common::bootstrap"></script>
+<script th:replace="common::custom-scripts"></script>
+<script th:replace="common::chartjs"></script>
+<script th:replace="common::chartjs-demo"></script>
+<script th:replace="common::chartjs-bar-demo"></script>
+<script th:replace="common::simple-datatables"></script>
+<script th:replace="common::datatables-demo"></script>
+<script>
+    // 获取按钮和输入框元素
+    const myButton = document.getElementById("myButton");
+    const myInput = document.getElementById("myInput");
+
+    // 将输入框禁用
+    myInput.disabled = true;
+
+    // 监听按钮的单击事件
+    myButton.addEventListener("click", function () {
+// 启用输入框
+        myInput.disabled = false;
+    });
+</script>
+</body>
+</html>
